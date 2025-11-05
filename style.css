@@ -6,6 +6,10 @@
   --accent: #6ee7b7; /* melon-ish green */
   --accent-2: #ff6fa3; /* soft pink accent */
   --discord: #5865f2;
+  --twitter: #1DA1F2;
+  --youtube: #FF0000;
+  --instagram: #E4405F;
+  --steam: #171a21;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -183,41 +187,138 @@ body{background:linear-gradient(180deg,#05060a 0%, #0b0c10 100%);color:var(--tex
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  width:44px;
-  height:44px;
-  border-radius:12px;
+  width:48px;
+  height:48px;
+  border-radius:14px;
   background:rgba(255,255,255,0.03);
   color:var(--text);
   text-decoration:none;
   transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border:1px solid rgba(255,255,255,0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.social::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .social svg{
   display:block;
-  transition:transform 0.2s ease;
+  transition:all 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .social:hover{
   transform:translateY(-4px);
   box-shadow:0 8px 24px rgba(0,0,0,0.45);
-  background:rgba(255,255,255,0.1);
-  border-color:var(--accent);
+  border-color:transparent;
 }
 
 .social:hover svg {
   transform:scale(1.15);
+  color: white;
 }
 
-.social.discord:hover{
-  background:var(--discord);
-  color:white;
-  border-color:var(--discord);
+.social:hover::before {
+  opacity: 1;
+}
+
+/* Brand-specific styles */
+.social.discord::before {
+  background: var(--discord);
+}
+
+.social[href*="x.com"]::before {
+  background: var(--twitter);
+}
+
+.social[href*="youtube"]::before {
+  background: var(--youtube);
+}
+
+.social[href*="instagram"]::before {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.social[href*="steam"]::before {
+  background: var(--steam);
+}
+
+/* Footer social links */
+.site-footer .socials a {
+  color: var(--muted);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.site-footer .socials a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.site-footer .socials a:hover {
+  color: white;
+}
+
+.site-footer .socials a:hover::before {
+  opacity: 1;
+}
+
+.site-footer .socials a[href*="discord.gg"]::before {
+  background: var(--discord);
+}
+
+.site-footer .socials a[href*="x.com"]::before {
+  background: var(--twitter);
+}
+
+.site-footer .socials a[href*="youtube"]::before {
+  background: var(--youtube);
+}
+
+.site-footer .socials a[href*="instagram"]::before {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.site-footer .socials a[href*="steam"]::before {
+  background: var(--steam);
 }
 
 .header-inner{display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;gap:12px;align-items:center}
-.avatar{flex:0 0 48px;border-radius:12px;overflow:hidden}
+.avatar{
+  flex:0 0 56px;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow: 0 4px 20px rgba(110,231,183,0.15);
+  border: 2px solid rgba(110,231,183,0.3);
+  transition: all 0.3s ease;
+}
+.avatar:hover {
+  transform: scale(1.05);
+  border-color: var(--accent);
+  box-shadow: 0 8px 25px rgba(110,231,183,0.25);
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .brand-text .tag{color:var(--muted);font-size:0.85rem;margin-top:2px}
 .header-actions{display:flex;align-items:center;gap:12px}
 .action-buttons{display:flex;gap:8px;align-items:center}
